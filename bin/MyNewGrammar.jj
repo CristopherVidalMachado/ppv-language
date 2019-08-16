@@ -1,0 +1,48 @@
+PARSER_BEGIN(SyntaxChecker)
+import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
+import java.io.IOException;
+public class SyntaxChecker {
+    public static void main(String[] args) {
+		String content = null;
+                try {
+					content = new String(Files.readAllBytes(Paths.get("/Users/cristophervidalmachado/Desktop/main.ppp")));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+        try {
+            new SyntaxChecker(new java.io.StringReader(content)).programaPrincipal();
+            System.out.println("Syntax is okay");
+ 			System.out.println(content);
+           
+        } catch (Throwable e) {
+            // Catching Throwable is ugly but JavaCC throws Error objects!
+            System.out.println("Syntax check failed: " + e.getMessage());
+        }
+    }
+}
+
+PARSER_END(SyntaxChecker)
+
+SKIP:  {" " | "\t" | "\n" | "\r"}
+TOKEN: {
+  "(" |
+  ")" |
+  "*" |
+  <NUM: (["0" - "9"]) + >|
+  <START_PROGRAM: ("START")>|
+  <END_PROGRAM: ("END")> |
+  <TIPO: "int"|"char"> |
+  <LETRA: ("a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"|"A"|"B"|"C"|"D"|"E"|
+"F"|"G"|"H"|"I"|"J"|"K"|"L"|"M"|"N"|"O"|"P"|"Q"|"R"|"S"|"T"|"U"|"V"|"W"|"X"|"Y"|"Z"| "_")> |
+  <IDENTIFICADOR: (<TIPO> <LETRA>(<LETRA> | <NUM>)* ";")> |
+  ";"
+ }
+
+void conteudo(): {} { <NUM>}
+void declaracao(): {} { (<TIPO>(<LETRA>)((<LETRA>)* |(<NUM>)*) ";" )* }
+void  programaPrincipal(): {} { declaracao() }
