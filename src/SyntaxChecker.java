@@ -26,8 +26,9 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
         }
     }
 
-  static final public void conteudo() throws ParseException {
-    jj_consume_token(NUM);
+  static final public void bloco() throws ParseException {
+    jj_consume_token(15);
+    jj_consume_token(16);
   }
 
   static final public void declaracao() throws ParseException {
@@ -47,6 +48,7 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
       label_2:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case NUM:
         case LETRA:{
           ;
           break;
@@ -55,14 +57,58 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
           jj_la1[1] = jj_gen;
           break label_2;
         }
-        jj_consume_token(LETRA);
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case LETRA:{
+          jj_consume_token(LETRA);
+          break;
+          }
+        case NUM:{
+          jj_consume_token(NUM);
+          break;
+          }
+        default:
+          jj_la1[2] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
       }
       jj_consume_token(14);
     }
   }
 
   static final public void programaPrincipal() throws ParseException {
+    jj_consume_token(START_PROGRAM);
+    jj_consume_token(LETRA);
+    label_3:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case NUM:
+      case LETRA:{
+        ;
+        break;
+        }
+      default:
+        jj_la1[3] = jj_gen;
+        break label_3;
+      }
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case LETRA:{
+        jj_consume_token(LETRA);
+        break;
+        }
+      case NUM:{
+        jj_consume_token(NUM);
+        break;
+        }
+      default:
+        jj_la1[4] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+    jj_consume_token(14);
     declaracao();
+    bloco();
   }
 
   static private boolean jj_initialized_once = false;
@@ -75,13 +121,13 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[3];
+  static final private int[] jj_la1 = new int[5];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x800,0x1000,0x100,};
+      jj_la1_0 = new int[] {0x800,0x1100,0x1100,0x1100,0x1100,};
    }
 
   /** Constructor with InputStream. */
@@ -102,7 +148,7 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -116,7 +162,7 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -133,7 +179,7 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -143,7 +189,7 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -159,7 +205,7 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -168,7 +214,7 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 5; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -219,12 +265,12 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[15];
+    boolean[] la1tokens = new boolean[17];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -233,7 +279,7 @@ public class SyntaxChecker implements SyntaxCheckerConstants {
         }
       }
     }
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 17; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

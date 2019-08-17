@@ -36,13 +36,19 @@ TOKEN: {
   <NUM: (["0" - "9"]) + >|
   <START_PROGRAM: ("START")>|
   <END_PROGRAM: ("END")> |
-  <TIPO: "int"|"char"> |
+  <TIPO: "int"|"varchar" | "float"> |
   <LETRA: ("a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"|"A"|"B"|"C"|"D"|"E"|
 "F"|"G"|"H"|"I"|"J"|"K"|"L"|"M"|"N"|"O"|"P"|"Q"|"R"|"S"|"T"|"U"|"V"|"W"|"X"|"Y"|"Z"| "_")> |
   <IDENTIFICADOR: (<TIPO> <LETRA>(<LETRA> | <NUM>)* ";")> |
   ";"
  }
 
-void conteudo(): {} { <NUM>}
-void declaracao(): {} { (<TIPO>(<LETRA>)((<LETRA>)* |(<NUM>)*) ";" )* }
-void  programaPrincipal(): {} { declaracao() }
+
+void bloco(): {} { "{" "}" }
+void declaracao(): {} { (<TIPO> <LETRA>(<LETRA> | <NUM> )* ";" )* }
+void  programaPrincipal(): {} { <START_PROGRAM> <LETRA>(<LETRA> | <NUM> )* ";" declaracao() bloco() }
+
+
+
+
+

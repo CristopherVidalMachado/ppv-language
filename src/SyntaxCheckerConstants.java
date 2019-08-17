@@ -41,6 +41,8 @@ public interface SyntaxCheckerConstants {
     "<LETRA>",
     "<IDENTIFICADOR>",
     "\";\"",
+    "\"{\"",
+    "\"}\"",
   };
 
 }
